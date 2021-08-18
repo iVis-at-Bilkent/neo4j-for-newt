@@ -16,7 +16,6 @@ import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.Result;
 import org.neo4j.graphdb.Transaction;
-import org.neo4j.kernel.api.procedure.SystemProcedure;
 import org.neo4j.logging.Log;
 import org.neo4j.procedure.Context;
 import org.neo4j.procedure.Description;
@@ -47,12 +46,12 @@ public class IntegrateAFMap {
     /**
      * This procedure takes a Node and gets the relationships going in and out of it
      *
-     * @param node  The node to get the relationships for
+     * @param sourceNodeG1  Source node from which the relationship originates
      * @return  A RelationshipTypes instance with the relations (incoming and outgoing) for a given node.
      */
     @Procedure(value = "integrateAFMap")
     @Description("Merge AF maps on push to database command	")
-    public Stream<Output> pushToDatabase(@Name("sourceNodeG1") Node sourceNodeG1, @Name("targetNodeG1") Node targetNodeG1) {
+    public Stream<SourceAndTargetNodes> pushToDatabase(@Name("sourceNodeG1") Node sourceNodeG1, @Name("targetNodeG1") Node targetNodeG1) {
         /*
          * Make graph from given data
          * For each node get its parent node. 
@@ -65,48 +64,104 @@ public class IntegrateAFMap {
          * Finally check for edges. Get adjacent nodes and check if 
          */
     	
-    	getMatchingNode(sourceNodeG1);
-    	getMatchingNode(targetNodeG1);    	
-    	
+    	Node matchingSourceNode = getMatchingNode(sourceNodeG1);
+    	Node matchingTargetNode = getMatchingNode(targetNodeG1);    	
     	
     	String returnStatement = "Operation pushToDatabase Done";
-    	return Stream.of(new Output(returnStatement));
+//    	return Stream.of(new Output(returnStatement));
+    	return Stream.of(new SourceAndTargetNodes(matchingSourceNode, matchingTargetNode));
     }    
     
-    public void getMatchingNode(Node node) {
-    	long nodeId = node.getId();
+    /**
+     * Return the matching node already present in the database
+     *
+     * @param node  used to compare any other node for matching purpose
+     * @return node which matches with the input node the most
+     */
+    public Node getMatchingNode(Node node) {
+    	// Extract information from the node
+    	Node matchingNodeToReturn = null;
+    	long nodeId = Helper.getNodeId(node);
+    	String nodeLabel = Helper.getNodeLabel(node);
+    	String nodeEntityName = Helper.getNodeEntityName(node);
+    	String[] nodeUOI = Helper.getNodeUOI(node);
     	
-    	/*
-    	 * Contains id of node
-    	 */
+    	HashMap<String, Object> nodeInfo = new HashMap<String, Object>();
+    	nodeInfo.put("nodeLabel", nodeLabel);
+    	nodeInfo.put("nodeEntityName", nodeEntityName);
+    	nodeInfo.put("nodeUOI", nodeUOI);
+    	
+    	
+    	
+    	// contains id of the node
     	Map<String, Object> queryParam = new HashMap<String, Object>();
     	queryParam.put("nodeId", nodeId);
     	
     	// Store neighboring nodes info
-    	HashSet<AFLangNode> nodeNeighborInfo = new HashSet<AFLangNode>();
+    	ArrayList<AFLangNode> neighborhoodNodesInfo;
     	
     	// get and store neighboring nodes info
     	try ( Transaction tx = db.beginTx() ) {
-    		Result nodeNeighbors = Helper.getNeighboringNodesUsingId(queryParam, tx);
-    		while( nodeNeighbors.hasNext()) {
-    			Map<String, Object> row = nodeNeighbors.next();
-    			for(Object value: row.values()) {
-    				Node tempNode = (Node) value;
-    				System.out.print(tempNode.getId() + " ");
-    				Iterable<Label> labels = tempNode.getLabels();
-    				String label = labels.iterator().next().name();
-    				
-    				String entityName = (String) tempNode.getProperty("entityName");
-    				String[] uoi =  (String[]) tempNode.getProperty("uoi");
-    				
-    				System.out.println(label + " " + entityName + " " + Arrays.toString(uoi));
-    				
-    				AFLangNode currentNode = new AFLangNode(label, entityName, uoi);
-    				nodeNeighborInfo.add(currentNode);
-    			}
-        	}
-    	}
+    		Result neighborhoodNodes = Helper.getNeighboringNodesUsingId(queryParam, tx);
+    		neighborhoodNodesInfo = Helper.getNeighborhoodNodesInfoAFMap(neighborhoodNodes);
+    	
+    		String getMatchingNodeQuery = "MATCH (n) WHERE labels(n) = [$nodeLabel] AND n.entityName = $nodeEntityName AND n.unitsOfInformation = $nodeUOI " +
+    									"RETURN n";
+    			
+		
+			Result matchingNodesResult = tx.execute(getMatchingNodeQuery, nodeInfo);
+			System.out.println("getMatchingNodeQuery");
+			
+			int maximumMatchingNeighbors = 0;
+			
+			// loop over all the records
+			while(matchingNodesResult.hasNext()) {
+				Map<String, Object> row = matchingNodesResult.next();
+				
+				// loop over the return key, value. Here only key is n
+				for(String key: row.keySet()) {
+					System.out.println(key);
+					Node matchingNode = (Node) row.get(key);
+					System.out.println(matchingNode.getId());
+					
+					// get neighboring nodes and its properties for this matching node
+					Map<String, Object> matchingNodeQueryParam = new HashMap<String, Object>();
+					matchingNodeQueryParam.put("nodeId", matchingNode.getId());
+					Result matchingNodeNeighborhoodNodes = Helper.getNeighboringNodesUsingId(matchingNodeQueryParam, tx);
+					ArrayList<AFLangNode> matchingNodeNeighborhoodNodesInfo = Helper.getNeighborhoodNodesInfoAFMap(matchingNodeNeighborhoodNodes);
+					
+					int matchCount = Helper.getIntersectionOfAFNodes(matchingNodeNeighborhoodNodesInfo, neighborhoodNodesInfo);
+					System.out.println("matchCount " + matchCount);
+					
+					if(matchCount > maximumMatchingNeighbors) {
+						matchingNodeToReturn = matchingNode;
+						maximumMatchingNeighbors = matchCount;
+					}
+				}
+			}
+		}
+    	// Get matching node with same parameters but which already exists in the database i.e. node.processed = 1
+//    	String processedMatchingNodeQuery = "MATCH (n) WHERE labels(n) = [$label] AND 
+		
+		return matchingNodeToReturn;
     }
+    
+    /**
+     * Complete this later
+     *
+     */
+    public static class SourceAndTargetNodes {
+        // These records contain two lists of distinct relationship types going in and out of a Node.
+        public Node matchingSourceNode;
+        public Node matchingTargetNode;
+
+        public SourceAndTargetNodes(Node matchingSourceNode, Node matchingTargetNode) {
+            this.matchingSourceNode = matchingSourceNode;
+            this.matchingTargetNode = matchingTargetNode;
+        }
+    }
+    
+    
     
     
     /**

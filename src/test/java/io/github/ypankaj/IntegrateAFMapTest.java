@@ -79,21 +79,21 @@ public class IntegrateAFMapTest {
         	n1.put( "language", "AF" );
         	n1.put("class", "BA_plain");
         	n1.put( "entityName", "TGF" );
-        	n1.put( "uoi", uoi );
+        	n1.put( "unitsOfInformation", uoi );
 
         	ArrayList<String> uoi2 = new ArrayList<>();
         	Map<String,Object> n2 = new HashMap<>();
         	n2.put( "language", "AF" );
         	n2.put("class", "BA_plain");
         	n2.put( "entityName", "TGF2" );
-        	n2.put( "uoi", uoi2 );
+        	n2.put( "unitsOfInformation", uoi2 );
         	
         	ArrayList<String> uoi3 = new ArrayList<>();
         	Map<String,Object> n3 = new HashMap<>();
         	n3.put( "language", "AF" );
         	n3.put("class", "or");
         	n3.put( "entityName", "orNode" );
-        	n3.put( "uoi", uoi3 );
+        	n3.put( "unitsOfInformation", uoi3 );
 
         	
         	/*
@@ -175,20 +175,21 @@ public class IntegrateAFMapTest {
         	        	
             
             //Execute our procedure against it.
-            Result result = session.run("MATCH (u:or) CALL integrateAFMap(u,u) YIELD out RETURN out");
+//            Result result = session.run("MATCH (u:or) CALL integrateAFMap(u,u) YIELD out RETURN out");
+            Result result = session.run("MATCH (u:or) CALL integrateAFMap(u,u) YIELD matchingSourceNode, matchingTargetNode RETURN matchingSourceNode, matchingTargetNode");
 
-            System.out.println();
-            while (result.hasNext()) {
-				Map<String, Object> row = result.next().asMap();
-				for(String key: row.keySet()) {
-//					System.out.println(key);
-//					String key = name.toString();
-					Object value = row.get(key);
-					System.out.println("Test " + key + " " + row.getClass().getName() + " " + value);
-//					System.out.println(value);
-				}
-
-			}
+//            System.out.println();
+//            while (result.hasNext()) {
+//				Map<String, Object> row = result.next().asMap();
+//				for(String key: row.keySet()) {
+////					System.out.println(key);
+////					String key = name.toString();
+//					Object value = row.get(key);
+//					System.out.println("Test " + key + " " + row.getClass().getName() + " " + value);
+////					System.out.println(value);
+//				}
+//
+//			}
             
             log.info("Running Asserts");
             assertEquals(true, true);
