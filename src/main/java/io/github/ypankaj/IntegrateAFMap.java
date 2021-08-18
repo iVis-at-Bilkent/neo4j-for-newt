@@ -32,6 +32,9 @@ public class IntegrateAFMap {
     @Context
 	public GraphDatabaseService db;
     
+    @Context
+    public Transaction tx;
+    
     private static Logger logg = Logger.getLogger(IntegrateAFMap.class.getName());
     
     public class Output {
@@ -101,45 +104,45 @@ public class IntegrateAFMap {
     	ArrayList<AFLangNode> neighborhoodNodesInfo;
     	
     	// get and store neighboring nodes info
-    	try ( Transaction tx = db.beginTx() ) {
-    		Result neighborhoodNodes = Helper.getNeighboringNodesUsingId(queryParam, tx);
-    		neighborhoodNodesInfo = Helper.getNeighborhoodNodesInfoAFMap(neighborhoodNodes);
-    	
-    		String getMatchingNodeQuery = "MATCH (n) WHERE labels(n) = [$nodeLabel] AND n.entityName = $nodeEntityName AND n.unitsOfInformation = $nodeUOI " +
-    									"RETURN n";
-    			
+//    	try ( Transaction tx = db.beginTx() ) {
+		Result neighborhoodNodes = Helper.getNeighboringNodesUsingId(queryParam, tx);
+		neighborhoodNodesInfo = Helper.getNeighborhoodNodesInfoAFMap(neighborhoodNodes);
+	
+		String getMatchingNodeQuery = "MATCH (n) WHERE labels(n) = [$nodeLabel] AND n.entityName = $nodeEntityName AND n.unitsOfInformation = $nodeUOI " +
+									"RETURN n";
+			
+	
+		Result matchingNodesResult = tx.execute(getMatchingNodeQuery, nodeInfo);
+		System.out.println("getMatchingNodeQuery");
 		
-			Result matchingNodesResult = tx.execute(getMatchingNodeQuery, nodeInfo);
-			System.out.println("getMatchingNodeQuery");
+		int maximumMatchingNeighbors = 0;
+		
+		// loop over all the records
+		while(matchingNodesResult.hasNext()) {
+			Map<String, Object> row = matchingNodesResult.next();
 			
-			int maximumMatchingNeighbors = 0;
-			
-			// loop over all the records
-			while(matchingNodesResult.hasNext()) {
-				Map<String, Object> row = matchingNodesResult.next();
+			// loop over the return key, value. Here only key is n
+			for(String key: row.keySet()) {
+				System.out.println(key);
+				Node matchingNode = (Node) row.get(key);
+				System.out.println(matchingNode.getId());
 				
-				// loop over the return key, value. Here only key is n
-				for(String key: row.keySet()) {
-					System.out.println(key);
-					Node matchingNode = (Node) row.get(key);
-					System.out.println(matchingNode.getId());
-					
-					// get neighboring nodes and its properties for this matching node
-					Map<String, Object> matchingNodeQueryParam = new HashMap<String, Object>();
-					matchingNodeQueryParam.put("nodeId", matchingNode.getId());
-					Result matchingNodeNeighborhoodNodes = Helper.getNeighboringNodesUsingId(matchingNodeQueryParam, tx);
-					ArrayList<AFLangNode> matchingNodeNeighborhoodNodesInfo = Helper.getNeighborhoodNodesInfoAFMap(matchingNodeNeighborhoodNodes);
-					
-					int matchCount = Helper.getIntersectionOfAFNodes(matchingNodeNeighborhoodNodesInfo, neighborhoodNodesInfo);
-					System.out.println("matchCount " + matchCount);
-					
-					if(matchCount > maximumMatchingNeighbors) {
-						matchingNodeToReturn = matchingNode;
-						maximumMatchingNeighbors = matchCount;
-					}
+				// get neighboring nodes and its properties for this matching node
+				Map<String, Object> matchingNodeQueryParam = new HashMap<String, Object>();
+				matchingNodeQueryParam.put("nodeId", matchingNode.getId());
+				Result matchingNodeNeighborhoodNodes = Helper.getNeighboringNodesUsingId(matchingNodeQueryParam, tx);
+				ArrayList<AFLangNode> matchingNodeNeighborhoodNodesInfo = Helper.getNeighborhoodNodesInfoAFMap(matchingNodeNeighborhoodNodes);
+				
+				int matchCount = Helper.getIntersectionOfAFNodes(matchingNodeNeighborhoodNodesInfo, neighborhoodNodesInfo);
+				System.out.println("matchCount " + matchCount);
+				
+				if(matchCount > maximumMatchingNeighbors) {
+					matchingNodeToReturn = matchingNode;
+					maximumMatchingNeighbors = matchCount;
 				}
 			}
 		}
+//		}
     	// Get matching node with same parameters but which already exists in the database i.e. node.processed = 1
 //    	String processedMatchingNodeQuery = "MATCH (n) WHERE labels(n) = [$label] AND 
 		
