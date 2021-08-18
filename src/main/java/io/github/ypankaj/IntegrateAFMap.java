@@ -65,82 +65,48 @@ public class IntegrateAFMap {
          * Finally check for edges. Get adjacent nodes and check if 
          */
     	
-    	long sourceNodeId = sourceNodeG1.getId();
-    	long targetNodeId = targetNodeG1.getId();
+    	getMatchingNode(sourceNodeG1);
+    	getMatchingNode(targetNodeG1);    	
     	
-    	/*
-    	 * Contains id of sourceNode
-    	 */
-    	Map<String, Object> sourceQueryParam = new HashMap<String, Object>();
-    	sourceQueryParam.put("nodeId", sourceNodeId);
-    	
-    	/*
-    	 * Contains id of targetNode
-    	 */
-    	Map<String, Object> targetQueryParam = new HashMap<String, Object>();
-    	targetQueryParam.put("nodeId", targetNodeId);
-    	
-    	// Store neighboring nodes info
-    	HashSet<AFLangNode> sourceNodeNeighborInfo = new HashSet<AFLangNode>();
-    	HashSet<AFLangNode> targetNodeNeighborInfo = new HashSet<AFLangNode>();
-    	
-    	// get and store neighboring nodes info
-    	try ( Transaction tx = db.beginTx() ) {
-    		Result sourceNodeNeighbors = Helper.getNeighboringNodesUsingId(sourceQueryParam, tx);
-    		while( sourceNodeNeighbors.hasNext()) {
-    			Map<String, Object> row = sourceNodeNeighbors.next();
-    			for(Object value: row.values()) {
-    				Node tempNode = (Node) value;
-    				System.out.print(tempNode.getId() + " ");
-    				Iterable<Label> labels = tempNode.getLabels();
-    				String label = labels.iterator().next().name();
-    				
-    				String entityName = (String) tempNode.getProperty("entityName");
-    				String[] uoi =  (String[]) tempNode.getProperty("uoi");
-    				
-    				System.out.println(label + " " + entityName + " " + Arrays.toString(uoi));
-    				
-    				AFLangNode currentNode = new AFLangNode(label, entityName, uoi);
-    				sourceNodeNeighborInfo.add(currentNode);
-    			}
-        	}
-    	}
-    	
-    	try ( Transaction tx = db.beginTx() ) {
-    		Result targetNodeNeighbors = Helper.getNeighboringNodesUsingId(targetQueryParam, tx);
-    		while( targetNodeNeighbors.hasNext()) {
-    			Map<String, Object> row = targetNodeNeighbors.next();
-    			for(Object value: row.values()) {
-    				Node tempNode = (Node) value;
-    				System.out.print(tempNode.getId() + " ");
-    				Iterable<Label> labels = tempNode.getLabels();
-    				String label = labels.iterator().next().name();
-    				
-    				String entityName = (String) tempNode.getProperty("entityName");
-    				String[] uoi =  (String[]) tempNode.getProperty("uoi");
-    				
-    				System.out.println(label + " " + entityName + " " + Arrays.toString(uoi));
-    				
-    				AFLangNode currentNode = new AFLangNode(label, entityName, uoi);
-    				targetNodeNeighborInfo.add(currentNode);
-    			}
-        	}
-    	}    	
-    	
-    	
-    	Map<String, Object> propertyMap = sourceNodeG1.getAllProperties();
-    	
-    	log.info("Inside function, ready to print properties");
-    	
-//    	for(String key: propertyMap.keySet()) {
-//    		System.out.print(key + " ");
-//    		Object value = propertyMap.get(key);
-//    		System.out.println(value);
-//    	}
     	
     	String returnStatement = "Operation pushToDatabase Done";
     	return Stream.of(new Output(returnStatement));
     }    
+    
+    public void getMatchingNode(Node node) {
+    	long nodeId = node.getId();
+    	
+    	/*
+    	 * Contains id of node
+    	 */
+    	Map<String, Object> queryParam = new HashMap<String, Object>();
+    	queryParam.put("nodeId", nodeId);
+    	
+    	// Store neighboring nodes info
+    	HashSet<AFLangNode> nodeNeighborInfo = new HashSet<AFLangNode>();
+    	
+    	// get and store neighboring nodes info
+    	try ( Transaction tx = db.beginTx() ) {
+    		Result nodeNeighbors = Helper.getNeighboringNodesUsingId(queryParam, tx);
+    		while( nodeNeighbors.hasNext()) {
+    			Map<String, Object> row = nodeNeighbors.next();
+    			for(Object value: row.values()) {
+    				Node tempNode = (Node) value;
+    				System.out.print(tempNode.getId() + " ");
+    				Iterable<Label> labels = tempNode.getLabels();
+    				String label = labels.iterator().next().name();
+    				
+    				String entityName = (String) tempNode.getProperty("entityName");
+    				String[] uoi =  (String[]) tempNode.getProperty("uoi");
+    				
+    				System.out.println(label + " " + entityName + " " + Arrays.toString(uoi));
+    				
+    				AFLangNode currentNode = new AFLangNode(label, entityName, uoi);
+    				nodeNeighborInfo.add(currentNode);
+    			}
+        	}
+    	}
+    }
     
     
     /**
