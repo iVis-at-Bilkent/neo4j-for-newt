@@ -74,6 +74,14 @@
     
     <!-- Awesome Procedures on Cypher -->
     <!-- https://mvnrepository.com/artifact/org.neo4j.procedure/apoc -->
+	<dependency>
+	    <groupId>org.neo4j.procedure</groupId>
+	    <artifactId>apoc</artifactId>
+	    <scope>system</scope>
+	    <version>4.2.0.0</version>
+	    <systemPath>${basedir}/src/lib/apoc-4.2.0.0-all.jar</systemPath>
+	</dependency>
+
     
 
   </dependencies>
