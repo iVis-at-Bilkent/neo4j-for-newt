@@ -100,7 +100,7 @@ public class Helper {
     	
     	for(AFLangNode afLangNodeSet1: list1) {
     		for(AFLangNode afLangNodeSet2: list2) {
-    			if(list1.equals(list2)) {
+    			if(afLangNodeSet1.equals(afLangNodeSet2)) {
     				matchCount++;
     				break;
     			}
