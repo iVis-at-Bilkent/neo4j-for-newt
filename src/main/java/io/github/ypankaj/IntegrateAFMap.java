@@ -108,7 +108,7 @@ public class IntegrateAFMap {
 		Result neighborhoodNodes = Helper.getNeighboringNodesUsingId(queryParam, tx);
 		neighborhoodNodesInfo = Helper.getNeighborhoodNodesInfoAFMap(neighborhoodNodes);
 	
-		String getMatchingNodeQuery = "MATCH (n) WHERE labels(n) = [$nodeLabel] AND n.entityName = $nodeEntityName AND n.unitsOfInformation = $nodeUOI " +
+		String getMatchingNodeQuery = "MATCH (n) WHERE labels(n) = [$nodeLabel] AND n.entityName = $nodeEntityName AND n.unitsOfInformation = $nodeUOI AND n.processed = 1 " +
 									"RETURN n";
 			
 	

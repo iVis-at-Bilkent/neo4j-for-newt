@@ -3,6 +3,7 @@ package io.github.ypankaj;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,13 +18,13 @@ import org.junit.jupiter.api.TestInstance;
 import org.neo4j.driver.Config;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.GraphDatabase;
+import org.neo4j.driver.Record;
 import org.neo4j.driver.Result;
 import org.neo4j.driver.Session;
 import org.neo4j.harness.Neo4j;
 import org.neo4j.harness.Neo4jBuilders;
 import org.neo4j.procedure.Procedure;
-
-
+import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
 import org.neo4j.driver.internal.InternalNode;
 
@@ -70,7 +71,7 @@ public class IntegrateAFMapTest {
         final String nameOne = "INCOMING";
         final String nameTwo= "OUTGOING";
 
-        // In a try-block, to make sure we close the session after the test
+//        // In a try-block, to make sure we close the session after the test
         try(Session session = driver.session()) {
         	ArrayList<String> uoi = new ArrayList<>();
         	uoi.add("Alpha");
@@ -80,6 +81,8 @@ public class IntegrateAFMapTest {
         	n1.put("class", "BA_plain");
         	n1.put( "entityName", "TGF" );
         	n1.put( "unitsOfInformation", uoi );
+        	n1.put( "processed", 0);
+        	
 
         	ArrayList<String> uoi2 = new ArrayList<>();
         	Map<String,Object> n2 = new HashMap<>();
@@ -87,6 +90,7 @@ public class IntegrateAFMapTest {
         	n2.put("class", "BA_plain");
         	n2.put( "entityName", "TGF2" );
         	n2.put( "unitsOfInformation", uoi2 );
+        	n2.put( "processed", 0);
         	
         	ArrayList<String> uoi3 = new ArrayList<>();
         	Map<String,Object> n3 = new HashMap<>();
@@ -94,6 +98,7 @@ public class IntegrateAFMapTest {
         	n3.put("class", "or");
         	n3.put( "entityName", "orNode" );
         	n3.put( "unitsOfInformation", uoi3 );
+        	n3.put( "processed", 0);
 
         	
         	/*
@@ -179,17 +184,21 @@ public class IntegrateAFMapTest {
             Result result = session.run("MATCH (u:or) CALL integrateAFMap(u,u) YIELD matchingSourceNode, matchingTargetNode RETURN matchingSourceNode, matchingTargetNode");
 
 //            System.out.println();
-//            while (result.hasNext()) {
-//				Map<String, Object> row = result.next().asMap();
-//				for(String key: row.keySet()) {
-////					System.out.println(key);
-////					String key = name.toString();
-//					Object value = row.get(key);
-//					System.out.println("Test " + key + " " + row.getClass().getName() + " " + value);
-////					System.out.println(value);
-//				}
-//
-//			}
+//            while( result.hasNext()) {
+//    			Record row = result.next();
+//    			for(Object value: row.values()) {
+//    				Object tempNode = value;
+//    				System.out.print(tempNode.getId() + " ");
+//    				Iterable<Label> labels = tempNode.getLabels();
+//    				String currentLabel = labels.iterator().next().name();
+//    				
+//    				String currentEntityName = (String) tempNode.getProperty("entityName");
+//    				String[] uoiTemp =  (String[]) tempNode.getProperty("unitsOfInformation");
+//    				
+//    				System.out.println(currentLabel + " " + currentEntityName + " " + Arrays.toString(uoiTemp));
+//    				
+//    			}
+//        	}
             
             log.info("Running Asserts");
             assertEquals(true, true);
