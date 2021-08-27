@@ -2,10 +2,11 @@ package io.github.ypankaj;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
@@ -14,8 +15,11 @@ import org.neo4j.graphdb.Transaction;
 
 public class Helper {
 	
-	public static Set<String> logicalOperators = new HashSet<>(Arrays.asList("and", "or", "not", "delay"));
+	protected static final Set<String> logicalOperators = new HashSet<>(Arrays.asList("and", "or", "not", "delay"));
+
+	static Logger logger = Logger.getLogger(Helper.class.getName());
 	
+	private Helper() {}
 	/** 
 	 * Returns the id of the node
 	 */
@@ -27,25 +31,21 @@ public class Helper {
      */
     public static String getNodeLabel(Node node) {
     	Iterable<Label> labels = node.getLabels();
-    	String label = labels.iterator().next().name();
-    	
-    	return label;
+    	return labels.iterator().next().name();
     }
     
     /**
      * Returns node's entityName
      */
     public static String getNodeEntityName(Node node) {
-    	String entityName = (String) node.getProperty("entityName");
-    	return entityName;
+    	return (String) node.getProperty("entityName");
     }
     
     /**
      * Get node's uoi
      */
     public static String[] getNodeUOI(Node node) {
-    	String[] uoi =  (String[]) node.getProperty("unitsOfInformation");
-    	return uoi;
+    	return (String[]) node.getProperty("unitsOfInformation");
     }
     
     /**
@@ -54,9 +54,7 @@ public class Helper {
     public static Result getNeighboringNodesUsingId(Map<String, Object> queryParams, Transaction tx) {
     	String queryString = "MATCH (n)-[]-(m) WHERE id(n) = $nodeId " +
 								"RETURN m;" ;
-    	Result result = tx.execute(queryString, queryParams);
-    	
-    	return result;
+    	return tx.execute(queryString, queryParams);
     }
     
     /**
@@ -65,9 +63,9 @@ public class Helper {
      * @param Result the neighboring from which information/properties is being collected
      * @return array of AFLangNodes containing useful info/properties
      */
-    public static ArrayList<AFLangNode> getNeighborhoodNodesInfoAFMap(Result neighboorhoodNodes) {
-    	ArrayList<AFLangNode> neighborhoodNodesInfo = new ArrayList<AFLangNode>();
-    	
+    public static List<AFLangNode> getNeighborhoodNodesInfoAFMap(Result neighboorhoodNodes) {
+    	List<AFLangNode> neighborhoodNodesInfo = new ArrayList<>();
+    	logger.info("getNeighborhoodNodesInfoAFMap ");
     	while( neighboorhoodNodes.hasNext()) {
 			Map<String, Object> row = neighboorhoodNodes.next();
 			for(Object value: row.values()) {
@@ -95,7 +93,7 @@ public class Helper {
      * @param set2 second set
      * @return number of matching nodes
      */
-    public static int getIntersectionOfAFNodes(ArrayList<AFLangNode> list1, ArrayList<AFLangNode> list2) {
+    public static int getIntersectionOfAFNodes(List<AFLangNode> list1, List<AFLangNode> list2) {
     	int matchCount = 0;
     	
     	for(AFLangNode afLangNodeSet1: list1) {

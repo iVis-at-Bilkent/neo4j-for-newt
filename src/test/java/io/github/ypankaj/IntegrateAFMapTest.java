@@ -3,12 +3,10 @@ package io.github.ypankaj;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
-import java.util.Iterator;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -18,15 +16,11 @@ import org.junit.jupiter.api.TestInstance;
 import org.neo4j.driver.Config;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.GraphDatabase;
-import org.neo4j.driver.Record;
 import org.neo4j.driver.Result;
 import org.neo4j.driver.Session;
 import org.neo4j.harness.Neo4j;
 import org.neo4j.harness.Neo4jBuilders;
 import org.neo4j.procedure.Procedure;
-import org.neo4j.graphdb.Label;
-import org.neo4j.graphdb.Node;
-import org.neo4j.driver.internal.InternalNode;
 
 import apoc.*;
 
@@ -48,12 +42,12 @@ public class IntegrateAFMapTest {
                 .withProcedure(IntegrateAFMap.class)
                 .build();
 
-        this.driver = GraphDatabase.driver(embeddedDatabaseServer.boltURI(), driverConfig);
+        IntegrateAFMapTest.driver = GraphDatabase.driver(embeddedDatabaseServer.boltURI(), driverConfig);
     }
 
     @AfterAll
     void closeDriver(){
-        this.driver.close();
+        IntegrateAFMapTest.driver.close();
         this.embeddedDatabaseServer.close();
     }
 
@@ -68,8 +62,6 @@ public class IntegrateAFMapTest {
     @Test
     public void checkReturnStatement() {
     	System.out.println("Inside");
-        final String nameOne = "INCOMING";
-        final String nameTwo= "OUTGOING";
 
 //        // In a try-block, to make sure we close the session after the test
         try(Session session = driver.session()) {
