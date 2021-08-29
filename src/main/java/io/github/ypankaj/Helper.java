@@ -1,12 +1,19 @@
 package io.github.ypankaj;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.HashMap;
 import java.util.logging.Logger;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
@@ -46,6 +53,13 @@ public class Helper {
      */
     public static String[] getNodeUOI(Node node) {
     	return (String[]) node.getProperty("unitsOfInformation");
+    }
+
+	/**
+     * Get node's State Variable
+     */
+    public static String[] getNodeStateVariables(Node node) {
+    	return (String[]) node.getProperty("stateVariables");
     }
     
     /**
@@ -105,5 +119,33 @@ public class Helper {
     		}
     	}
     	return matchCount;
+    }
+
+	/**
+     * Convert JSON string to a Map to be used as params in queries
+     * 
+     * @param jsonStr JSON data as a string
+     * @return Map representing parameters to be used in query
+     */
+	public static Map<String, Object> getMapFromJSONString(String jsonStr) {
+		Map<String, Object> mapping = new HashMap<>();
+        try {
+			TypeReference<Map<String, Object>> typeRef = new TypeReference<>() {};
+			mapping = new ObjectMapper().readValue(jsonStr, typeRef);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+		return mapping;
+	}
+
+	/**
+     * Read files as string
+     * 
+     * @param file path to a file
+     * @return converted string
+     */
+	public static String readFileAsString(String file) throws Exception {
+        return new String(Files.readAllBytes(Paths.get(file)));
     }
 }
