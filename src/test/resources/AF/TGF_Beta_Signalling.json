@@ -1,0 +1,339 @@
+{
+    "nodesData": [
+    {
+        "newtId": "glyph0",
+        "class": "compartment",
+        "entityName": "cytosol",
+        "language": "AF",
+        "unitsOfInformation": []
+    },
+    {
+        "newtId": "glyph11",
+        "class": "BA_plain",
+        "entityName": "TAK",
+        "language": "AF",
+        "unitsOfInformation": [],
+        "parent": "glyph0"
+    },
+    {
+        "newtId": "glyph7",
+        "class": "BA_plain",
+        "entityName": "RAS",
+        "language": "AF",
+        "unitsOfInformation": [],
+        "parent": "glyph0"
+    },
+    {
+        "newtId": "glyph8",
+        "class": "BA_plain",
+        "entityName": "BAMBI",
+        "language": "AF",
+        "unitsOfInformation": [],
+        "parent": "glyph0"
+    },
+    {
+        "newtId": "glyph18",
+        "class": "BA_plain",
+        "entityName": "FKBP12",
+        "language": "AF",
+        "unitsOfInformation": [],
+        "parent": "glyph0"
+    },
+    {
+        "newtId": "glyph16",
+        "class": "BA_plain",
+        "entityName": "Smurf",
+        "language": "AF",
+        "unitsOfInformation": [],
+        "parent": "glyph0"
+    },
+    {
+        "newtId": "glyph19",
+        "class": "BA_plain",
+        "entityName": "SARA",
+        "language": "AF",
+        "unitsOfInformation": [],
+        "parent": "glyph0"
+    },
+    {
+        "newtId": "glyph6",
+        "class": "BA_plain",
+        "entityName": "RSmad",
+        "language": "AF",
+        "unitsOfInformation": [],
+        "parent": "glyph0"
+    },
+    {
+        "newtId": "glyph12",
+        "class": "BA_plain",
+        "entityName": "p42/p44 MAPKs",
+        "language": "AF",
+        "unitsOfInformation": [],
+        "parent": "glyph0"
+    },
+    {
+        "newtId": "glyph10",
+        "class": "BA_plain",
+        "entityName": "p38",
+        "language": "AF",
+        "unitsOfInformation": [],
+        "parent": "glyph0"
+    },
+    {
+        "newtId": "glyph9",
+        "class": "BA_plain",
+        "entityName": "JNK",
+        "language": "AF",
+        "unitsOfInformation": [],
+        "parent": "glyph0"
+    },
+    {
+        "newtId": "glyph1",
+        "class": "compartment",
+        "entityName": "nucleus",
+        "language": "AF",
+        "unitsOfInformation": [],
+        "parent": "glyph0"
+    },
+    {
+        "newtId": "glyph20",
+        "class": "BA_plain",
+        "entityName": "co-activator",
+        "language": "AF",
+        "unitsOfInformation": [],
+        "parent": "glyph1"
+    },
+    {
+        "newtId": "glyph17",
+        "class": "BA_plain",
+        "entityName": "co-repressor",
+        "language": "AF",
+        "unitsOfInformation": [],
+        "parent": "glyph1"
+    },
+    {
+        "newtId": "glyph5",
+        "class": "phenotype",
+        "entityName": "Gene\ntranscription",
+        "language": "AF",
+        "unitsOfInformation": [],
+        "parent": "glyph1"
+    },
+    {
+        "newtId": "glyph21",
+        "class": "and",
+        "entityName": "",
+        "language": "AF",
+        "unitsOfInformation": [],
+        "parent": "glyph1"
+    },
+    {
+        "newtId": "glyph22",
+        "class": "or",
+        "entityName": "",
+        "language": "AF",
+        "unitsOfInformation": [],
+        "parent": "glyph1"
+    },
+    {
+        "newtId": "nwtN_161ecab2-f526-4b41-8217-6719914ae8c4",
+        "class": "BA_macromolecule",
+        "entityName": "RSmad\nCo-Smads",
+        "language": "AF",
+        "unitsOfInformation": [
+        ""
+        ],
+        "parent": "glyph0"
+    },
+    {
+        "newtId": "nwtN_c2ba92e8-25c0-4528-a50e-d7e46deaf282",
+        "class": "BA_macromolecule",
+        "entityName": "I-Smad",
+        "language": "AF",
+        "unitsOfInformation": [
+        ""
+        ],
+        "parent": "glyph0"
+    },
+    {
+        "newtId": "nwtN_19a32de0-b3ef-405b-8b13-84c7ff7a0068",
+        "class": "BA_nucleic_acid_feature",
+        "entityName": "I-Smad",
+        "language": "AF",
+        "unitsOfInformation": [
+        ""
+        ],
+        "parent": "glyph0"
+    },
+    {
+        "newtId": "nwtN_52fdebc6-f82b-4a13-8640-938571eed1d3",
+        "class": "BA_complex",
+        "entityName": "TAK\nTAB",
+        "language": "AF",
+        "unitsOfInformation": [
+        ""
+        ],
+        "parent": "glyph0"
+    },
+    {
+        "newtId": "glyph13",
+        "class": "BA_plain",
+        "entityName": "TGFβ",
+        "language": "AF",
+        "unitsOfInformation": []
+    },
+    {
+        "newtId": "glyph2",
+        "class": "BA_plain",
+        "entityName": "TGFβ\nreceptor",
+        "language": "AF",
+        "unitsOfInformation": []
+    }
+    ],
+    "edgesData": [
+    {
+        "stoichiometry": 0,
+        "class": "positive_influence",
+        "source": "glyph13",
+        "target": "glyph2"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "positive_influence",
+        "source": "glyph6",
+        "target": "nwtN_161ecab2-f526-4b41-8217-6719914ae8c4"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "negative_influence",
+        "source": "nwtN_c2ba92e8-25c0-4528-a50e-d7e46deaf282",
+        "target": "nwtN_161ecab2-f526-4b41-8217-6719914ae8c4"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "logic_arc",
+        "source": "glyph10",
+        "target": "glyph22"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "positive_influence",
+        "source": "glyph19",
+        "target": "glyph6"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "logic_arc",
+        "source": "glyph12",
+        "target": "glyph22"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "logic_arc",
+        "source": "glyph21",
+        "target": "glyph22"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "positive_influence",
+        "source": "nwtN_19a32de0-b3ef-405b-8b13-84c7ff7a0068",
+        "target": "nwtN_c2ba92e8-25c0-4528-a50e-d7e46deaf282"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "positive_influence",
+        "source": "glyph11",
+        "target": "nwtN_52fdebc6-f82b-4a13-8640-938571eed1d3"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "positive_influence",
+        "source": "nwtN_52fdebc6-f82b-4a13-8640-938571eed1d3",
+        "target": "glyph10"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "positive_influence",
+        "source": "nwtN_52fdebc6-f82b-4a13-8640-938571eed1d3",
+        "target": "glyph9"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "logic_arc",
+        "source": "glyph9",
+        "target": "glyph22"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "negative_influence",
+        "source": "glyph16",
+        "target": "glyph6"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "positive_influence",
+        "source": "glyph7",
+        "target": "glyph12"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "positive_influence",
+        "source": "glyph2",
+        "target": "glyph11"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "logic_arc",
+        "source": "glyph20",
+        "target": "glyph21"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "necessary_stimulation",
+        "source": "glyph22",
+        "target": "glyph5"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "logic_arc",
+        "source": "glyph17",
+        "target": "glyph21"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "negative_influence",
+        "source": "glyph18",
+        "target": "glyph2"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "negative_influence",
+        "source": "glyph8",
+        "target": "glyph2"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "positive_influence",
+        "source": "glyph2",
+        "target": "glyph6"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "positive_influence",
+        "source": "glyph2",
+        "target": "glyph7"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "necessary_stimulation",
+        "source": "nwtN_19a32de0-b3ef-405b-8b13-84c7ff7a0068",
+        "target": "glyph5"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "logic_arc",
+        "source": "nwtN_161ecab2-f526-4b41-8217-6719914ae8c4",
+        "target": "glyph21"
+    }
+    ]
+}

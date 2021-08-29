@@ -1,0 +1,815 @@
+{
+    "nodesData": [
+    {
+        "newtId": "_82f19e9e-6aa2-42b3-8b5e-8cee17197085",
+        "entityName": "synaptic button",
+        "language": "PD",
+        "class": "compartment",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": ""
+    },
+    {
+        "newtId": "_66737d5c-5193-43a2-baa6-094aa1c21654",
+        "entityName": "CHT1",
+        "language": "PD",
+        "class": "macromolecule",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_82f19e9e-6aa2-42b3-8b5e-8cee17197085"
+    },
+    {
+        "newtId": "be08c23c-dca4-43cd-b8a6-06f6ebdaf710",
+        "entityName": "SNARE",
+        "language": "PD",
+        "class": "macromolecule",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_82f19e9e-6aa2-42b3-8b5e-8cee17197085"
+    },
+    {
+        "newtId": "_96b935d7-083c-468d-8607-d3b70fff10a7",
+        "entityName": "",
+        "language": "PD",
+        "class": "process",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_82f19e9e-6aa2-42b3-8b5e-8cee17197085"
+    },
+    {
+        "newtId": "_9007194d-c2e6-4939-a795-be71ae35a60d",
+        "entityName": "synaptic vesicle",
+        "language": "PD",
+        "class": "compartment",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_82f19e9e-6aa2-42b3-8b5e-8cee17197085"
+    },
+    {
+        "newtId": "a083be43-422d-9067-c688-661cec17e472",
+        "entityName": "ACh",
+        "language": "PD",
+        "class": "simple_chemical",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_9007194d-c2e6-4939-a795-be71ae35a60d"
+    },
+    {
+        "newtId": "d2531344-d005-4b92-afd2-14dcb7d40965",
+        "entityName": "ACh",
+        "language": "PD",
+        "class": "simple_chemical",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_82f19e9e-6aa2-42b3-8b5e-8cee17197085"
+    },
+    {
+        "newtId": "_135e2807-2b5c-4886-bbdf-d3c8bf433ab9",
+        "entityName": "choline",
+        "language": "PD",
+        "class": "simple_chemical",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_82f19e9e-6aa2-42b3-8b5e-8cee17197085"
+    },
+    {
+        "newtId": "ed79ab12-7b79-4a8a-80b3-c65181c076e4",
+        "entityName": "acetyl\nCoA",
+        "language": "PD",
+        "class": "simple_chemical",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_82f19e9e-6aa2-42b3-8b5e-8cee17197085"
+    },
+    {
+        "newtId": "_2bdf0056-96f6-4184-a214-8c7cc7da6214",
+        "entityName": "",
+        "language": "PD",
+        "class": "process",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_82f19e9e-6aa2-42b3-8b5e-8cee17197085"
+    },
+    {
+        "newtId": "ce103257-dbf5-430f-9e6c-1745990341de",
+        "entityName": "ChAT",
+        "language": "PD",
+        "class": "macromolecule",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_82f19e9e-6aa2-42b3-8b5e-8cee17197085"
+    },
+    {
+        "newtId": "_9886817c-7043-4de9-9895-0cd247f47190",
+        "entityName": "vAChT",
+        "language": "PD",
+        "class": "macromolecule",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_82f19e9e-6aa2-42b3-8b5e-8cee17197085"
+    },
+    {
+        "newtId": "_3797d8d2-4f00-4d1f-9d85-ecad1e61746d",
+        "entityName": "",
+        "language": "PD",
+        "class": "process",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_82f19e9e-6aa2-42b3-8b5e-8cee17197085"
+    },
+    {
+        "newtId": "e95a1256-8a47-4aaf-b3d8-7d8387d5a31d",
+        "entityName": "synaptic cleft",
+        "language": "PD",
+        "class": "compartment",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": ""
+    },
+    {
+        "newtId": "b88b6460-4172-427f-abbe-d7c0f0a174ce",
+        "entityName": "AChE",
+        "language": "PD",
+        "class": "macromolecule",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "e95a1256-8a47-4aaf-b3d8-7d8387d5a31d"
+    },
+    {
+        "newtId": "fb8eb6bc-a39a-4361-b938-026a3b63a9b9",
+        "entityName": "choline",
+        "language": "PD",
+        "class": "simple_chemical",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "e95a1256-8a47-4aaf-b3d8-7d8387d5a31d"
+    },
+    {
+        "newtId": "_8ba53135-01b4-4a4b-b87d-a5971850cb39",
+        "entityName": "acetate",
+        "language": "PD",
+        "class": "simple_chemical",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "e95a1256-8a47-4aaf-b3d8-7d8387d5a31d"
+    },
+    {
+        "newtId": "_6865aebe-2564-4ff6-a15a-6bd07a3a0ef8",
+        "entityName": "",
+        "language": "PD",
+        "class": "process",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "e95a1256-8a47-4aaf-b3d8-7d8387d5a31d"
+    },
+    {
+        "newtId": "d9e08f4b-94b8-4285-af36-f4159b56a2fc",
+        "entityName": "",
+        "language": "PD",
+        "class": "process",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "e95a1256-8a47-4aaf-b3d8-7d8387d5a31d"
+    },
+    {
+        "newtId": "_06e41c55-1352-407e-9c4b-604d3f5f616b",
+        "entityName": "ACh",
+        "language": "PD",
+        "class": "simple_chemical",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "e95a1256-8a47-4aaf-b3d8-7d8387d5a31d"
+    },
+    {
+        "newtId": "_23d436e2-6633-42f2-98d0-00dbb962ac3d",
+        "entityName": "muscle cytosol",
+        "language": "PD",
+        "class": "compartment",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": ""
+    },
+    {
+        "newtId": "f3ac8950-6d69-4c5b-92dd-3020906ea2c8",
+        "entityName": "nAChR",
+        "language": "PD",
+        "class": "macromolecule",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [
+        "closed"
+        ],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_23d436e2-6633-42f2-98d0-00dbb962ac3d"
+    },
+    {
+        "newtId": "_4b4a1add-6cf6-47cb-b952-5ea0ceade9a0",
+        "entityName": "nAChR",
+        "language": "PD",
+        "class": "macromolecule",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [
+        "open"
+        ],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_23d436e2-6633-42f2-98d0-00dbb962ac3d"
+    },
+    {
+        "newtId": "ac2f1b2b-2e6e-4647-84bd-c141925f4d85",
+        "entityName": "Ca2+",
+        "language": "PD",
+        "class": "simple_chemical",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_23d436e2-6633-42f2-98d0-00dbb962ac3d"
+    },
+    {
+        "newtId": "_264a7088-e810-4679-9c92-f06886510f98",
+        "entityName": "",
+        "language": "PD",
+        "class": "process",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_23d436e2-6633-42f2-98d0-00dbb962ac3d"
+    },
+    {
+        "newtId": "d756f4ab-9813-4d55-aa86-c37dc7f3b286",
+        "entityName": "",
+        "language": "PD",
+        "class": "process",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_23d436e2-6633-42f2-98d0-00dbb962ac3d"
+    },
+    {
+        "newtId": "_1129b8c7-71da-4a6c-8681-3082e6f04a6c",
+        "entityName": "myosin",
+        "language": "PD",
+        "class": "complex",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_23d436e2-6633-42f2-98d0-00dbb962ac3d"
+    },
+    {
+        "newtId": "_26a815b4-64c3-4797-9bfd-7dceafb3345d",
+        "entityName": "myosin",
+        "language": "PD",
+        "class": "macromolecule",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_1129b8c7-71da-4a6c-8681-3082e6f04a6c"
+    },
+    {
+        "newtId": "_5fcbfc9c-92a0-45b2-834b-ad8866d4008b",
+        "entityName": "ATP",
+        "language": "PD",
+        "class": "simple_chemical",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_1129b8c7-71da-4a6c-8681-3082e6f04a6c"
+    },
+    {
+        "newtId": "_9b7f467a-30eb-4b8e-a966-43692648a46e",
+        "entityName": "actin",
+        "language": "PD",
+        "class": "macromolecule",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_23d436e2-6633-42f2-98d0-00dbb962ac3d"
+    },
+    {
+        "newtId": "_3a96c155-e828-4038-8384-4c25f4f1aaf6",
+        "entityName": "",
+        "language": "PD",
+        "class": "association",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_23d436e2-6633-42f2-98d0-00dbb962ac3d"
+    },
+    {
+        "newtId": "_97c2c87b-c5d2-41fb-97f6-a1001075cf08",
+        "entityName": "",
+        "language": "PD",
+        "class": "dissociation",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_23d436e2-6633-42f2-98d0-00dbb962ac3d"
+    },
+    {
+        "newtId": "a0a8dd07-644b-4646-a305-ef249fa67752",
+        "entityName": "myosin",
+        "language": "PD",
+        "class": "macromolecule",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_23d436e2-6633-42f2-98d0-00dbb962ac3d"
+    },
+    {
+        "newtId": "_20e434c6-e738-4ae5-8a8a-e49f53fe85fb",
+        "entityName": "ATP",
+        "language": "PD",
+        "class": "simple_chemical",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_23d436e2-6633-42f2-98d0-00dbb962ac3d"
+    },
+    {
+        "newtId": "_85682413-94f7-8b3c-e052-59a72cd48e12",
+        "entityName": "tense",
+        "language": "PD",
+        "class": "complex",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [
+        "tense"
+        ],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_23d436e2-6633-42f2-98d0-00dbb962ac3d"
+    },
+    {
+        "newtId": "_1ce3ffae-f9a7-09a1-c91f-bf176708c1d2",
+        "entityName": "myosin",
+        "language": "PD",
+        "class": "macromolecule",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_85682413-94f7-8b3c-e052-59a72cd48e12"
+    },
+    {
+        "newtId": "_0fbd0d13-c59b-48ab-240d-c262dd1bc480",
+        "entityName": "actin",
+        "language": "PD",
+        "class": "macromolecule",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_85682413-94f7-8b3c-e052-59a72cd48e12"
+    },
+    {
+        "newtId": "e889d01c-1eb1-4c83-8bd9-0160e9c2abcb",
+        "entityName": "muscle\ncontraction",
+        "language": "PD",
+        "class": "phenotype",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_23d436e2-6633-42f2-98d0-00dbb962ac3d"
+    },
+    {
+        "newtId": "_04ea25d8-dfaa-7912-303f-be00b342fc27",
+        "entityName": "relaxed",
+        "language": "PD",
+        "class": "complex",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [
+        "relaxed"
+        ],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_23d436e2-6633-42f2-98d0-00dbb962ac3d"
+    },
+    {
+        "newtId": "_343e0d0d-eeac-5cf5-acec-bc15975650a3",
+        "entityName": "myosin",
+        "language": "PD",
+        "class": "macromolecule",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_04ea25d8-dfaa-7912-303f-be00b342fc27"
+    },
+    {
+        "newtId": "_96e17352-dd50-0332-a224-954cd97fc3c2",
+        "entityName": "actin",
+        "language": "PD",
+        "class": "macromolecule",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_04ea25d8-dfaa-7912-303f-be00b342fc27"
+    },
+    {
+        "newtId": "a3f830ac-34e3-466a-62ac-642bc3e51777",
+        "entityName": "ATP",
+        "language": "PD",
+        "class": "simple_chemical",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_04ea25d8-dfaa-7912-303f-be00b342fc27"
+    },
+    {
+        "newtId": "_1e9c2dbf-2a4d-48c9-9d47-de9c0314f5b8",
+        "entityName": "",
+        "language": "PD",
+        "class": "process",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_23d436e2-6633-42f2-98d0-00dbb962ac3d"
+    },
+    {
+        "newtId": "_6259ebd3-e879-4c70-b442-a602e5408989",
+        "entityName": "Pi",
+        "language": "PD",
+        "class": "simple_chemical",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_23d436e2-6633-42f2-98d0-00dbb962ac3d"
+    },
+    {
+        "newtId": "fb04887c-b0a0-4a2d-8cdd-a70826c659ee",
+        "entityName": "ADP",
+        "language": "PD",
+        "class": "simple_chemical",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_23d436e2-6633-42f2-98d0-00dbb962ac3d"
+    },
+    {
+        "newtId": "nwtN_d1535aaf-5d91-4108-9331-852d6acb876e",
+        "entityName": "ER",
+        "language": "PD",
+        "class": "compartment",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_23d436e2-6633-42f2-98d0-00dbb962ac3d"
+    },
+    {
+        "newtId": "_8c083cee-7025-4035-9201-1319da22340b",
+        "entityName": "Ca2+",
+        "language": "PD",
+        "class": "simple_chemical",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "nwtN_d1535aaf-5d91-4108-9331-852d6acb876e"
+    },
+    {
+        "newtId": "_00ac7e0a-288f-42e0-b252-9bcb59027572",
+        "entityName": "",
+        "language": "PD",
+        "class": "association",
+        "multimer": false,
+        "stateVariables": [],
+        "unitsOfInformation": [],
+        "cloneMarker": false,
+        "cloneLabel": "",
+        "parent": "_23d436e2-6633-42f2-98d0-00dbb962ac3d"
+    }
+    ],
+    "edgesData": [
+    {
+        "stoichiometry": 0,
+        "class": "consumption",
+        "source": "_04ea25d8-dfaa-7912-303f-be00b342fc27",
+        "target": "_1e9c2dbf-2a4d-48c9-9d47-de9c0314f5b8"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "production",
+        "source": "_1e9c2dbf-2a4d-48c9-9d47-de9c0314f5b8",
+        "target": "fb04887c-b0a0-4a2d-8cdd-a70826c659ee"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "production",
+        "source": "_3797d8d2-4f00-4d1f-9d85-ecad1e61746d",
+        "target": "a083be43-422d-9067-c688-661cec17e472"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "consumption",
+        "source": "d2531344-d005-4b92-afd2-14dcb7d40965",
+        "target": "_3797d8d2-4f00-4d1f-9d85-ecad1e61746d"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "necessary_stimulation",
+        "source": "_9886817c-7043-4de9-9895-0cd247f47190",
+        "target": "_3797d8d2-4f00-4d1f-9d85-ecad1e61746d"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "catalysis",
+        "source": "ce103257-dbf5-430f-9e6c-1745990341de",
+        "target": "_2bdf0056-96f6-4184-a214-8c7cc7da6214"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "consumption",
+        "source": "ed79ab12-7b79-4a8a-80b3-c65181c076e4",
+        "target": "_2bdf0056-96f6-4184-a214-8c7cc7da6214"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "consumption",
+        "source": "_135e2807-2b5c-4886-bbdf-d3c8bf433ab9",
+        "target": "_2bdf0056-96f6-4184-a214-8c7cc7da6214"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "production",
+        "source": "_2bdf0056-96f6-4184-a214-8c7cc7da6214",
+        "target": "d2531344-d005-4b92-afd2-14dcb7d40965"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "production",
+        "source": "_96b935d7-083c-468d-8607-d3b70fff10a7",
+        "target": "_135e2807-2b5c-4886-bbdf-d3c8bf433ab9"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "consumption",
+        "source": "a083be43-422d-9067-c688-661cec17e472",
+        "target": "d9e08f4b-94b8-4285-af36-f4159b56a2fc"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "necessary_stimulation",
+        "source": "_66737d5c-5193-43a2-baa6-094aa1c21654",
+        "target": "_96b935d7-083c-468d-8607-d3b70fff10a7"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "consumption",
+        "source": "fb8eb6bc-a39a-4361-b938-026a3b63a9b9",
+        "target": "_96b935d7-083c-468d-8607-d3b70fff10a7"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "necessary_stimulation",
+        "source": "be08c23c-dca4-43cd-b8a6-06f6ebdaf710",
+        "target": "d9e08f4b-94b8-4285-af36-f4159b56a2fc"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "production",
+        "source": "d9e08f4b-94b8-4285-af36-f4159b56a2fc",
+        "target": "_06e41c55-1352-407e-9c4b-604d3f5f616b"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "consumption",
+        "source": "_06e41c55-1352-407e-9c4b-604d3f5f616b",
+        "target": "_6865aebe-2564-4ff6-a15a-6bd07a3a0ef8"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "catalysis",
+        "source": "b88b6460-4172-427f-abbe-d7c0f0a174ce",
+        "target": "_6865aebe-2564-4ff6-a15a-6bd07a3a0ef8"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "production",
+        "source": "_6865aebe-2564-4ff6-a15a-6bd07a3a0ef8",
+        "target": "fb8eb6bc-a39a-4361-b938-026a3b63a9b9"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "production",
+        "source": "_6865aebe-2564-4ff6-a15a-6bd07a3a0ef8",
+        "target": "_8ba53135-01b4-4a4b-b87d-a5971850cb39"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "consumption",
+        "source": "f3ac8950-6d69-4c5b-92dd-3020906ea2c8",
+        "target": "_264a7088-e810-4679-9c92-f06886510f98"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "production",
+        "source": "_264a7088-e810-4679-9c92-f06886510f98",
+        "target": "_4b4a1add-6cf6-47cb-b952-5ea0ceade9a0"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "necessary_stimulation",
+        "source": "_4b4a1add-6cf6-47cb-b952-5ea0ceade9a0",
+        "target": "d756f4ab-9813-4d55-aa86-c37dc7f3b286"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "production",
+        "source": "d756f4ab-9813-4d55-aa86-c37dc7f3b286",
+        "target": "ac2f1b2b-2e6e-4647-84bd-c141925f4d85"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "stimulation",
+        "source": "ac2f1b2b-2e6e-4647-84bd-c141925f4d85",
+        "target": "_3a96c155-e828-4038-8384-4c25f4f1aaf6"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "necessary_stimulation",
+        "source": "_06e41c55-1352-407e-9c4b-604d3f5f616b",
+        "target": "_264a7088-e810-4679-9c92-f06886510f98"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "consumption",
+        "source": "_1129b8c7-71da-4a6c-8681-3082e6f04a6c",
+        "target": "_3a96c155-e828-4038-8384-4c25f4f1aaf6"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "production",
+        "source": "_1e9c2dbf-2a4d-48c9-9d47-de9c0314f5b8",
+        "target": "_6259ebd3-e879-4c70-b442-a602e5408989"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "consumption",
+        "source": "_9b7f467a-30eb-4b8e-a966-43692648a46e",
+        "target": "_3a96c155-e828-4038-8384-4c25f4f1aaf6"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "production",
+        "source": "_97c2c87b-c5d2-41fb-97f6-a1001075cf08",
+        "target": "_9b7f467a-30eb-4b8e-a966-43692648a46e"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "production",
+        "source": "_3a96c155-e828-4038-8384-4c25f4f1aaf6",
+        "target": "_04ea25d8-dfaa-7912-303f-be00b342fc27"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "production",
+        "source": "_97c2c87b-c5d2-41fb-97f6-a1001075cf08",
+        "target": "a0a8dd07-644b-4646-a305-ef249fa67752"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "consumption",
+        "source": "_85682413-94f7-8b3c-e052-59a72cd48e12",
+        "target": "_97c2c87b-c5d2-41fb-97f6-a1001075cf08"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "consumption",
+        "source": "_8c083cee-7025-4035-9201-1319da22340b",
+        "target": "d756f4ab-9813-4d55-aa86-c37dc7f3b286"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "production",
+        "source": "_1e9c2dbf-2a4d-48c9-9d47-de9c0314f5b8",
+        "target": "_85682413-94f7-8b3c-e052-59a72cd48e12"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "stimulation",
+        "source": "_85682413-94f7-8b3c-e052-59a72cd48e12",
+        "target": "e889d01c-1eb1-4c83-8bd9-0160e9c2abcb"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "production",
+        "source": "_00ac7e0a-288f-42e0-b252-9bcb59027572",
+        "target": "_1129b8c7-71da-4a6c-8681-3082e6f04a6c"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "consumption",
+        "source": "_20e434c6-e738-4ae5-8a8a-e49f53fe85fb",
+        "target": "_00ac7e0a-288f-42e0-b252-9bcb59027572"
+    },
+    {
+        "stoichiometry": 0,
+        "class": "consumption",
+        "source": "a0a8dd07-644b-4646-a305-ef249fa67752",
+        "target": "_00ac7e0a-288f-42e0-b252-9bcb59027572"
+    }
+    ]
+}
