@@ -16,14 +16,12 @@ import org.junit.jupiter.api.TestInstance;
 import org.neo4j.driver.Config;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.GraphDatabase;
+import org.neo4j.driver.Record;
 import org.neo4j.driver.Result;
 import org.neo4j.driver.Session;
 import org.neo4j.harness.Neo4j;
 import org.neo4j.harness.Neo4jBuilders;
 import org.neo4j.procedure.Procedure;
-
-import apoc.*;
-
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class IntegrateAFMapTest {
@@ -197,6 +195,43 @@ public class IntegrateAFMapTest {
         }
         catch(Exception e) {
         	log.info(e.getMessage());
+        }
+    }
+
+	@Test
+    void checkIfTGFBetaSignallingAFMapIsLoadedCorrectly() throws Exception {
+        String TGFBetaSignallingFile = "src/test/resources/AF/TGF_Beta_Signalling.json";
+        String TGFBetaSignallingAsString = Helper.readFileAsString(TGFBetaSignallingFile);
+
+        String queryLocation = "src/test/resources/AF/AFQuery.json";
+        String queryMapAsString = Helper.readFileAsString(queryLocation);
+        
+        Map<String, Object> TGFBetaSignallingData = Helper.getMapFromJSONString(TGFBetaSignallingAsString);
+        Map<String, Object> queryMap = Helper.getMapFromJSONString(queryMapAsString);
+
+        String query = (String) queryMap.get("query");
+        
+		// generate TGF Beta Singalling Map
+        try(Session session = driver.session()) {
+        	session.run( query, TGFBetaSignallingData );
+        }
+
+		// assert if node count is what is expected
+		try(Session session = driver.session()) {
+        	Result result = session.run("MATCH (n) RETURN COUNT(n) as NodeCount");
+			Record row = result.single();
+			int NodeCount = row.get("NodeCount").asInt();
+
+			assertEquals(23, NodeCount);
+        }
+
+		// assert if relationship count is what is expected
+		try(Session session = driver.session()) {
+        	Result result = session.run("MATCH ()-[r]->() RETURN COUNT(r) as RelCount");
+			Record row = result.single();
+			int RelCount = row.get("RelCount").asInt();
+
+			assertEquals(44, RelCount);
         }
     }
 }
