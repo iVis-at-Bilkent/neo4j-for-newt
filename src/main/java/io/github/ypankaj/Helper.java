@@ -26,7 +26,7 @@ public class Helper {
 
 	static Logger logger = Logger.getLogger(Helper.class.getName());
 	
-	private Helper() {}
+    private Helper() {}
 	/** 
 	 * Returns the id of the node
 	 */
@@ -60,6 +60,27 @@ public class Helper {
      */
     public static String[] getNodeStateVariables(Node node) {
     	return (String[]) node.getProperty("stateVariables");
+    }
+
+    /**
+     * Get node's multimer property
+     */
+    public static Boolean getNodeMultimer(Node node) {
+        return (Boolean) node.getProperty("multimer");
+    }
+
+    /**
+     * Get node's cloneMarker property
+     */
+    public static Boolean getNodeCloneMarker(Node node) {
+        return (Boolean) node.getProperty("cloneMarker");
+    }
+
+    /**
+     * Get node's cloneLabel property
+     */
+    public static String getNodeCloneLabel(Node node) {
+        return (String) node.getProperty("cloneLabel");
     }
     
     /**
