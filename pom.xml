@@ -38,16 +38,48 @@
       <groupId>org.neo4j</groupId>
       <artifactId>neo4j</artifactId>
       <version>${neo4j.version}</version>
+      <exclusions>
+        <exclusion>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-nop</artifactId>
+        </exclusion>
+      </exclusions>
       <scope>provided</scope>
     </dependency>
 
     <!-- Test Dependencies -->
+
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.2.6</version>
+    </dependency>
+
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-core</artifactId>
+      <version>1.2.6</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.32</version>
+      <scope>test</scope>
+    </dependency>
+
     <dependency>
       <!-- This is used for a utility that lets us start Neo4j with
            a specific Procedure, which is nice for writing tests. -->
       <groupId>org.neo4j.test</groupId>
       <artifactId>neo4j-harness</artifactId>
       <version>${neo4j.version}</version>
+      <exclusions>
+        <exclusion>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-nop</artifactId>
+        </exclusion>
+      </exclusions>
       <scope>test</scope>
     </dependency>
 
@@ -75,23 +107,20 @@
     
     <!-- Awesome Procedures on Cypher -->
     <!-- https://mvnrepository.com/artifact/org.neo4j.procedure/apoc -->
-	<dependency>
-	    <groupId>org.neo4j.procedure</groupId>
-	    <artifactId>apoc</artifactId>
-	    <scope>system</scope>
-	    <version>4.2.0.0</version>
-	    <systemPath>${basedir}/src/lib/apoc-4.2.0.0-all.jar</systemPath>
-	</dependency>
+    <dependency>
+        <groupId>org.neo4j.procedure</groupId>
+        <artifactId>apoc</artifactId>
+        <scope>system</scope>
+        <version>4.2.0.0</version>
+        <systemPath>${basedir}/src/lib/apoc-4.2.0.0-all.jar</systemPath>
+    </dependency>
 
-  <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
-  <dependency>
-    <groupId>com.fasterxml.jackson.core</groupId>
-    <artifactId>jackson-core</artifactId>
-    <version>${jackson-core.version}</version>
-  </dependency>
-
-
-    
+    <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>${jackson-core.version}</version>
+    </dependency>
 
   </dependencies>
 
