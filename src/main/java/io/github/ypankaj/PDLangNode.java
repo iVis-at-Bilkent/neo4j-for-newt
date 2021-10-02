@@ -1,7 +1,10 @@
 package io.github.ypankaj;
 
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Objects;
+
+import org.neo4j.graphdb.Node;
 
 public class PDLangNode {
     private String label;
@@ -22,6 +25,27 @@ public class PDLangNode {
         this.cloneLabel = cloneLabel;
     }
 
+    public PDLangNode(Node node) {
+        this.label = Helper.getNodeLabel(node);
+        this.entityName = Helper.getNodeEntityName(node);
+        this.uoi = Helper.getNodeUOI(node);
+        this.stateVariables = Helper.getNodeStateVariables(node);
+        this.multimer = Helper.getNodeMultimer(node);
+        this.cloneMaker = Helper.getNodeCloneMarker(node);
+        this.cloneLabel = Helper.getNodeCloneLabel(node);
+    }
+
+    public PDLangNode(Map<String, Object> row, String key) {
+        Node node = (Node) row.get(key);
+        this.label = Helper.getNodeLabel(node);
+        this.entityName = Helper.getNodeEntityName(node);
+        this.uoi = Helper.getNodeUOI(node);
+        this.stateVariables = Helper.getNodeStateVariables(node);
+        this.multimer = Helper.getNodeMultimer(node);
+        this.cloneMaker = Helper.getNodeCloneMarker(node);
+        this.cloneLabel = Helper.getNodeCloneLabel(node);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -36,6 +60,19 @@ public class PDLangNode {
     @Override
     public int hashCode() {
         return Objects.hash(label, entityName, uoi, stateVariables, multimer, cloneMaker, cloneLabel);
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " label='" + getLabel() + "'" +
+            ", entityName='" + getEntityName() + "'" +
+            ", uoi=[" + String.join(", ", getUoi()) + "]" +
+            ", stateVariables=[" + String.join(", ", getStateVariables()) + "]" +
+            ", multimer='" + isMultimer() + "'" +
+            ", cloneMaker='" + isCloneMaker() + "'" +
+            ", cloneLabel='" + getCloneLabel() + "'" +
+            "}";
     }
 
     public String getLabel() {
