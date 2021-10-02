@@ -23,6 +23,8 @@ import org.neo4j.procedure.Procedure;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import io.github.ypankaj.enums.PDNode;
+
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class IntegratePDMapTest {
@@ -133,7 +135,9 @@ public class IntegratePDMapTest {
 
             InternalNode queriedNode = (InternalNode) record.get("n");
 
-            logger.info("Node's entity name {}", queriedNode.asMap().get("entityName"));
+            logger.info("{} {}", PDNode.ENTITY_NAME.toString(), PDNode.ENTITY_NAME.name());
+
+            logger.info("Node's entity name {}", queriedNode.asMap().get(PDNode.ENTITY_NAME.toString()));
             
             String queryIntegratePDMap = "MATCH (n) WHERE n.entityName = \"ChAT\" " +
                                             "CALL integratePDMap(n) YIELD out RETURN out";

@@ -20,6 +20,8 @@ import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Result;
 import org.neo4j.graphdb.Transaction;
 
+import io.github.ypankaj.enums.PDNode;
+
 public class Helper {
 	
 	protected static final Set<String> logicalOperators = new HashSet<>(Arrays.asList("and", "or", "not", "delay"));
@@ -45,42 +47,42 @@ public class Helper {
      * Returns node's entityName
      */
     public static String getNodeEntityName(Node node) {
-    	return (String) node.getProperty("entityName");
+    	return (String) node.getProperty(PDNode.ENTITY_NAME.toString());
     }
     
     /**
      * Get node's uoi
      */
     public static String[] getNodeUOI(Node node) {
-    	return (String[]) node.getProperty("unitsOfInformation");
+    	return (String[]) node.getProperty(PDNode.UOI.toString());
     }
 
 	/**
      * Get node's State Variable
      */
     public static String[] getNodeStateVariables(Node node) {
-    	return (String[]) node.getProperty("stateVariables");
+    	return (String[]) node.getProperty(PDNode.STATE_VARIABLES.toString());
     }
 
     /**
      * Get node's multimer property
      */
     public static Boolean getNodeMultimer(Node node) {
-        return (Boolean) node.getProperty("multimer");
+        return (Boolean) node.getProperty(PDNode.MULTIMER.toString());
     }
 
     /**
      * Get node's cloneMarker property
      */
     public static Boolean getNodeCloneMarker(Node node) {
-        return (Boolean) node.getProperty("cloneMarker");
+        return (Boolean) node.getProperty(PDNode.CLONE_MARKER.toString());
     }
 
     /**
      * Get node's cloneLabel property
      */
     public static String getNodeCloneLabel(Node node) {
-        return (String) node.getProperty("cloneLabel");
+        return (String) node.getProperty(PDNode.CLONE_LABEL.toString());
     }
     
     /**
