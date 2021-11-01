@@ -1,5 +1,6 @@
 package io.github.ypankaj;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,17 +47,49 @@ public class IntegratePDMap {
 	}
 
     /**
-     * This procedure takes a Node and gets the relationships going in and out of it
+     * Write node to the database if it does not already exists in it.
      *
-     * @param node  The node to get the relationships for
-     * @return  A RelationshipTypes instance with the relations (incoming and outgoing) for a given node.
+     * @param node  entity to be pushed to the database
+     * @return  ideally should be nothing but still not sure about it
      */
     @Procedure(value = "integratePDMap")
     @Description("Merge PD maps on push to database command")
     public Stream<Output> pushToDatabasePD(@Name("node") Node node) { 
 
-        List<Node> matchingNodes;
+        boolean nodeExists = checkIfNodeExistsInDatabase(node);
+
+        String returnStatement = "Operation pushToDatabase Done";
+    	return Stream.of(new Output(returnStatement));
+    }
+
+    /**
+     * Check if the unprocessed node under consideration already exists in
+     * database or not. This is done by comparing the neighbors and parent of
+     * the node under consideration to the nodes present in the database with
+     * isProcessed property equals to 1.
+     * @param node node under consideration
+     * @return true if the node already exists in the database else false
+     */
+    public boolean checkIfNodeExistsInDatabase(Node node) {
+
+        List<Node> matchingNodes = getMatchingNodesByComparingNodeAndItsParentProperties(node);
         
+        logger.info("Comparing neighboring nodes");
+        checkIfNodeExistsInDatabaseByComparingNeighboringNodes(node, matchingNodes);
+        logger.info("Neighboring node comparision complete");
+        return true;
+    }
+
+    /**
+     * Compare node's properties and its parent's property to get matching nodes
+     * already present in the database. Parent node can be null too and its
+     * handled here.
+     * @param node node under consideration
+     * @return list of matching nodes
+     */
+    List<Node> getMatchingNodesByComparingNodeAndItsParentProperties(Node node) {
+        List<Node> matchingNodes;
+
         // get PDLangNode from Node
         PDLangNode unprocessedNode = new PDLangNode(node);
         Node parentNode = getParentNodeFromNodePD(node);
@@ -98,7 +131,7 @@ public class IntegratePDMap {
             logger.info("parentNode is null");
             // TODO: Match isProcessed property = 1 in the query to match nodes
             // which are already present in DB
-            String getMatchingNodeQuery = "MATCH (parentNode:" + parentPDNode.getLabel() +  ")<-[:belongs_to_compartment|belongs_to_submap|belongs_to_complex]-(n:" + unprocessedNode.getLabel() + ") \n" +
+            String getMatchingNodeQuery = "MATCH (n:" + unprocessedNode.getLabel() + ") \n" +
                                     " WHERE n.entityName = $nodeProps.entityName \n" + // labels
                                     " AND n.unitsOfInformation = $nodeProps.unitsOfInformation \n" + // units of information 
                                     " AND n.stateVariables = $nodeProps.stateVariables \n" + // state variables
@@ -116,17 +149,14 @@ public class IntegratePDMap {
                     
         }
 
-        // TODO: Compare the neighbors of the unprocessed node and matching
-        // nodes to determine if the unprocessed node exists in database or not
-        boolean exists = doesNodeAlreadyExistInDatabase(node, matchingNodes);
-        
-
-
-    	
-    	String returnStatement = "Operation pushToDatabase Done";
-    	return Stream.of(new Output(returnStatement));
+        return matchingNodes;
     }
 
+    /**
+     * Returns parent node of input node.Returns null if node has no parent.
+     * @param node input node for which parent node is to be returned.
+     * @return
+     */
     public Node getParentNodeFromNodePD(Node node) {
         long id = Helper.getNodeId(node);
         return getParentNodeFromNodeIdPD(id);
@@ -149,9 +179,71 @@ public class IntegratePDMap {
         return parentNode;
     }
 
-    boolean doesNodeAlreadyExistInDatabase(Node unprocessedNode, List<Node> nodes) {
+    /**
+     * Check if the unprocessed node under consideration already exists in
+     * database or not. This is done by comparing the neighbors of the nodes.
+     * @param unprocessedNode node with isProcessed property = 1 i.e. deposited
+     *                        in the database just now for the algo to work
+     * @param nodes matching nodes with isProcessed property = 0 i.e. already
+     *              in the database
+     * @return true if unprocessedNode is already there in the database.
+     */
+    boolean checkIfNodeExistsInDatabaseByComparingNeighboringNodes(Node unprocessedNode, List<Node> matchingNodes) {
+        int maxOverlap = 0;
+        List<Node> unprocessedNodesNeighbors = getNeighboringNodes(unprocessedNode);
+        List<PDLangNode> unprocessedNodesNeighborsPDLang = convertNodeToPDLangNode(unprocessedNodesNeighbors);
+        for(Node matchingNode: matchingNodes) {
+            int num = getMatchingNeighborhoodNodesNumber(unprocessedNodesNeighborsPDLang, matchingNode);
+            maxOverlap = Math.max(maxOverlap, num);
+        }
+        // matching criteria for now, if atleast one neighbor matches then
+        // consider the nodes same and return true
+        return maxOverlap > 0;
+    }
 
-        return true;
+    /**
+     * Get the common neighors of the unprocessedNode and the matchingNode
+     * @param unprocessedNode node whose neigbors are to be compared
+     * @param matchingNode another node whose neigbors is to be compared
+     * @return the number of common neighbors
+     */
+    int getMatchingNeighborhoodNodesNumber(Node unprocessedNode, Node matchingNode) {
+        List<Node> unprocessedNodesNeighbors = getNeighboringNodes(unprocessedNode);
+        List<PDLangNode> unprocessedNodesNeighborsPDLang = convertNodeToPDLangNode(unprocessedNodesNeighbors);
+        return getMatchingNeighborhoodNodesNumber(unprocessedNodesNeighborsPDLang, matchingNode);
+    }
+
+    /**
+     * Compare the nodes in unprocessedNodesNeighbors with the neighbors of
+     * matchedNode and return the common nodes.
+     * @param unprocessedNodesNeighbors neighbors of the unprocessed nodes
+     * @param matchedNode node whose neighbor will be compare to the above list
+     * @return the number of common neighbors
+     */
+    int getMatchingNeighborhoodNodesNumber(List<PDLangNode> unprocessedNodesNeighbors, Node matchedNode) {
+        List<Node> matchedNodesNeighbors = getNeighboringNodes(matchedNode);
+        List<PDLangNode> matchedNodesNeighborsPDLang = convertNodeToPDLangNode(matchedNodesNeighbors);
+        return getOverlapNumber(unprocessedNodesNeighbors, matchedNodesNeighborsPDLang);
+    }
+
+    List<Node> getNeighboringNodes(Node node) {
+        List<Node> neighboringNodes = new ArrayList<>();
+
+        Map<String, Object> queryParams = new HashMap<>();
+        queryParams.put("nodeId", Helper.getNodeId(node));
+        String query = "MATCH (n)-[]-(m) WHERE id(n) = $nodeId " +
+                        "RETURN collect(distinct m) as mNodeList";
+        Result result = tx.execute(query, queryParams);
+        
+        while(result.hasNext()) {
+            Map<String, Object> record = result.next();
+            @SuppressWarnings("unchecked") List<Node> nodeList = (List<Node>) record.get("mNodeList");
+            for(Node curNode: nodeList) {
+                neighboringNodes.add(curNode);
+            }
+        }
+
+        return neighboringNodes;
     }
 
     public Map<String, Object> getPropertiesAsMap(Node node) {
@@ -174,5 +266,38 @@ public class IntegratePDMap {
         props.put(PDNode.CLONE_LABEL.toString(), cloneLabel);
 
         return props;
+    }
+
+    List<PDLangNode> convertNodeToPDLangNode(List<Node> nodes) {
+        List<PDLangNode> pdLangNodes = new ArrayList<>();
+        for(Node node: nodes) {
+            pdLangNodes.add(new PDLangNode(node));
+        }
+
+        return pdLangNodes;
+    }
+
+    PDLangNode convertNodeToPDLangNode(Node node) {
+        return new PDLangNode(node);
+    }
+
+    /**
+     * Return the numer of nodes that overlap between the two lists
+     * @param l1 list 1
+     * @param l2 list 2
+     * @return number of matching nodes
+     */
+    int getOverlapNumber(List<PDLangNode> l1, List<PDLangNode> l2) {
+        int matchCount = 0;
+    	
+    	for(PDLangNode pdLangNode1: l1) {
+    		for(PDLangNode pdLangNode2: l2) {
+    			if(pdLangNode1.equals(pdLangNode2)) {
+    				matchCount++;
+    				break;
+    			}
+    		}
+    	}
+    	return matchCount;
     }
 }
